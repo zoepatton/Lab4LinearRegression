@@ -6,7 +6,6 @@
 #'
 #' @param formula A formula with dependent numeric variable on left and independent numeric variable on right.
 #' @param data A dataset 
-#' @export linreg
 #' @export
 
 
