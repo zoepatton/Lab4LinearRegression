@@ -6,6 +6,7 @@
 #' 
 
 library(ggplot2)
+library(dplyr)
 
 linreg<-setRefClass("linreg", 
         fields= list(
@@ -67,7 +68,7 @@ linreg<-setRefClass("linreg",
             find_t_vals <<- as.numeric(coefficients_est) / sqrt(v_coeff)
 
             
-            p_vals <<- pt(find_t_vals, degrees_of_freedom)
+            p_vals <<- 2*pt(-abs(find_t_vals), degrees_of_freedom)
             
             #Estimating the standardized residuals
             
@@ -138,16 +139,15 @@ linreg<-setRefClass("linreg",
             #print Residuals:
             cat("\n\nCoefficients:\n")
             
-            summary_vec <- cbind(coefficients_est, v_coeff, find_t_vals, p_vals)
+            summary_vec <- cbind(coefficients_est,as.numeric(lapply(v_coeff, sqrt)), find_t_vals, p_vals)
             colnames(summary_vec) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
             
-            print.default(summary_vec)
+            printCoefmat(summary_vec, P.value=TRUE, has.Pvalue=TRUE)
             
             #Print the standard error
-            s_res <- c("\n---\nResiduals standard error:\n", round(sqrt(res_var_est),5), "on", degrees_of_freedom, "degrees of freedom")
-            
-            invisible(sapply(s_res, function(x) cat(x, collapse=" ")))
-            
+            s_res <- c("--- \nResidual standard error: ",sqrt(res_var_est)," on ",degrees_of_freedom," degrees of freedom")
+            lapply(s_res, function(x) cat(x))
+            cat("\n")
           }
         )
 )
