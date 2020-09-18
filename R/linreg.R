@@ -1,9 +1,14 @@
-#' Building a linear regression model using ordinary least squares method and RC class
-#' 
-#' @field formula A formula with dependent numeric variable on left and independent numeric variable on right.
-#' @field data A dataset 
-#' 
-#' 
+#' Linear regression model
+#'
+#' \code{linreg} returns a linear regression model for formula and data inputs
+#'
+#' This is a function that builds a linear regression model using ordinary least squares method and RC class.
+#'
+#' @param formula A formula with dependent numeric variable on left and independent numeric variable on right.
+#' @param data A dataset 
+#' @export linreg
+#' @export
+
 
 library(ggplot2)
 library(dplyr)
