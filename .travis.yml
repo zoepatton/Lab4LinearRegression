@@ -1,2 +1,4 @@
 language: r
-cache: packages
+cache: package
+build_script:
+  - r_packages: ggplot2
