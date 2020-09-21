@@ -1,0 +1,43 @@
+---
+title: "Introduction to linreg"
+output: rmarkdown::html_vignette
+description: >
+  This file will explain how the linreg package works and how to use it on a well known dataset.
+vignette: >
+  %\VignetteIndexEntry{Introduction to linreg}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Lab4LinearRegression)
+```
+
+#Description of Function
+This function takes a given formula with independent and dependent variables as well as a dataset and creates a linear regression model. The function returns an object of an RC class. Different methods are implemented for this object in the RC objected oriented system and are detailed below.  
+
+##Methods availble in this function
+* 'print()' prints out the coefficients and coefficient names for given dataset.
+* 'plot()' creates two plots based off of data, residuals vs fitted values and scale to location values.
+* 'resid()' returns the vector of residuals.
+* 'pred()' returns the predicted values.
+* 'coef()' returns the coefficients as a named vector.
+* 'summary()' returns the coefficients with their standard error, t-value and p-value as well as the estimate of residual standard error and the degrees of freedom in the model.
+
+###How to use function:
+1. load data
+    *example: load(iris)
+1. set object to function, including the formula wanting to be used and the data 
+    *example: lin <- linreg(Petal.Length~Species, iris)
+1. implement chosen method by subsetting 
+    *examples: 
+        *lin$print() 
+        *lin$plot()
+        *lin$summary()
