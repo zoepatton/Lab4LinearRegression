@@ -6,7 +6,7 @@
 #'
 #' @param formula A formula with dependent numeric variable on left and independent numeric variable on right.
 #' @param data A dataset 
-#' @export
+#' @export 
 
 
 library(ggplot2)
@@ -97,12 +97,12 @@ linreg<-setRefClass("linreg",
           },
           plot = function(){
             
-            plotting_data <- data.frame(p_fitted <- fitted_vals, p_residuals <- residuals_est, p_std_res <- sqrt(abs(std_res)))
+            plotting_data <- data.frame(p_fitted = fitted_vals, p_residuals = residuals_est, p_std_res = sqrt(abs(std_res)))
             
             residuals_v_fitted <- ggplot(data=plotting_data, aes(x=p_fitted, y=p_residuals))+
-              geom_point(shape = 1) + 
-              geom_smooth(method = "loess", formula= y~x) + 
-              geom_hline(yintercept=0, col="red", linetype="dashed") +
+              geom_point() + 
+              geom_smooth(method="loess",formula = y~x, se=FALSE, color="red") + 
+              geom_hline(yintercept=0, linetype="dashed") +
               xlab("Fitted values")+
               ylab("Residuals") + 
               ggtitle("Residual vs Fitted") + 
@@ -111,7 +111,7 @@ linreg<-setRefClass("linreg",
             
             scale_location <- ggplot(data=plotting_data, aes(x=p_fitted, y=p_std_res)) +
               geom_point(shape = 1) + 
-              geom_smooth(method="loess",formula = y~x) + 
+              geom_smooth(method="loess",formula = y~x, se=FALSE) + 
               xlab("Fitted values") + 
               ggtitle("Scale - Location") +
               ylab(expression(sqrt("|Standardized residuals|"))) + 
