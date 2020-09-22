@@ -78,7 +78,9 @@ linreg<-setRefClass("linreg",
             
             hat_values <- X %*% solve(t(X) %*% X) %*% t(X)
             
-            std_res <<- residuals_est/(as.numeric(res_var_est) * sqrt(1-diag(hat_values)))
+            residuals_sigma<- (1/(degrees_of_freedom-1))*(sum(residuals_est^2))
+            
+            std_res <<- residuals_est/(sqrt(as.numeric(residuals_sigma)) * sqrt(1-diag(hat_values)))
             
           },
             
@@ -101,7 +103,7 @@ linreg<-setRefClass("linreg",
             
             residuals_v_fitted <- ggplot(data=plotting_data, aes(x=p_fitted, y=p_residuals))+
               geom_point() + 
-              geom_smooth(method="loess",formula = y~x, se=FALSE, color="red") + 
+              stat_summary(fun=median,color="red", geom="line") + 
               geom_hline(yintercept=0, linetype="dashed") +
               xlab("Fitted values")+
               ylab("Residuals") + 
@@ -111,7 +113,7 @@ linreg<-setRefClass("linreg",
             
             scale_location <- ggplot(data=plotting_data, aes(x=p_fitted, y=p_std_res)) +
               geom_point(shape = 1) + 
-              geom_smooth(method="loess",formula = y~x, se=FALSE) + 
+              stat_summary(fun=median,color="red", geom="line") + 
               xlab("Fitted values") + 
               ggtitle("Scale - Location") +
               ylab(expression(sqrt("|Standardized residuals|"))) + 
