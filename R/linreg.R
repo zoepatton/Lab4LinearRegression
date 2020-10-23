@@ -8,6 +8,9 @@ library(dplyr)
 #' This is a function that builds a linear regression model using ordinary least squares method and RC class.
 #' A reference class for linreg
 #' 
+#' @export linreg
+#' @exportClass linreg
+#' 
 #' @field formula A formula with dependent numeric variable on left and independent numeric variable on right.
 #' @field data A dataset 
 #' @field formula as character 
@@ -23,11 +26,10 @@ library(dplyr)
 #' @field p_vals as vector
 #' @field std_res as matrix
 #' 
-#' @return nothing
-#' @export 
 
 
 linreg<-setRefClass("linreg", 
+        # Include fields ------          
         fields= list(
           formula="formula", 
           data="data.frame",
@@ -43,6 +45,7 @@ linreg<-setRefClass("linreg",
           std_res = "matrix"), 
         
         methods=list(
+          #Initialize the the function ------
           initialize = function(formula,data) {
             call <<- c("linreg(formula = ",
                        Reduce(paste,deparse(formula)),
@@ -98,7 +101,7 @@ linreg<-setRefClass("linreg",
             std_res <<- residuals_est/(sqrt(as.numeric(residuals_sigma)) * sqrt(1-diag(hat_values)))
             
           },
-            
+          #print the summary of the output of function -------  
           print = function(){
             #print call
             cat("\nCall:\n")
@@ -112,6 +115,7 @@ linreg<-setRefClass("linreg",
             cat(paste(c_names,collapse = "  "),collapse="\n")
             cat(paste(c_vals,collapse = "  "),collapse="\n")
           },
+          #plot the output -------- 
           plot = function(){
             
             plotting_data <- data.frame(p_fitted = fitted_vals, p_residuals = residuals_est, p_std_res = sqrt(abs(std_res)))
@@ -137,12 +141,15 @@ linreg<-setRefClass("linreg",
             return(list(residuals_v_fitted, scale_location)) 
             
           },
+          #return residuals ------
           resid = function(){
             return(residuals_est)
           },
+          #return the fitted values -----
           pred = function(){
             return(fitted_vals)
           },
+          #save the coefficients as a vector -----
           coef = function(){
             
            coef_vector <- as.vector(t(coefficients_est))
@@ -151,6 +158,7 @@ linreg<-setRefClass("linreg",
             return(coef_vector)
             
           },
+          #return a summary of the function -----
           summary = function(){
             
             #print call

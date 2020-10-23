@@ -5,9 +5,6 @@
 \alias{linreg-class}
 \alias{linreg}
 \title{Linear regression model}
-\value{
-nothing
-}
 \description{
 returns a linear regression model for formula and data inputs
 
