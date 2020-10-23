@@ -2,3 +2,5 @@
 
 export(linreg)
 exportClasses(linreg)
+import(dplyr)
+import(ggplot2)

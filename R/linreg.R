@@ -1,10 +1,10 @@
-library(ggplot2)
-library(dplyr)
-
-#'  Linear regression model
+#' Linear regression model
 #'
+#' @import ggplot2
+#' @import dplyr
+#' 
 #' @description returns a linear regression model for formula and data inputs
-#'
+#' 
 #' This is a function that builds a linear regression model using ordinary least squares method and RC class.
 #' A reference class for linreg
 #' 
