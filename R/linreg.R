@@ -4,8 +4,22 @@
 #'
 #' This is a function that builds a linear regression model using ordinary least squares method and RC class.
 #'
-#' @param formula A formula with dependent numeric variable on left and independent numeric variable on right.
-#' @param data A dataset 
+#' @field formula A formula with dependent numeric variable on left and independent numeric variable on right.
+#' @field data A dataset 
+#' @field formula as character 
+#' @field data as data.frame
+#' @field call as vector
+#' @field coefficients_est as matrix
+#' @field fitted_vals as matrix
+#' @field residuals_est as matrix 
+#' @field degrees_of_freedom as numeric
+#' @field res_var_est as matrix 
+#' @field v_coeff as vector
+#' @field find_t_vals as numeric
+#' @field p_vals as vector
+#' @field std_res as matrix
+#' 
+#' @return nothing
 #' @export 
 
 
